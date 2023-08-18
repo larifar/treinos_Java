@@ -23,6 +23,10 @@ public class Conta {
         return balanceAccount;
     }
 
+    public void informationBalance(){
+        System.out.println("Saldo da conta atual: " + getBalanceAccount());
+    }
+
     //pegar informações da conta
     public void informationAccount(){
         System.out.println("*******************************************");
@@ -33,22 +37,42 @@ public class Conta {
     }
 
     //sacar dinheiro
-    public void withDraw(double value){
+    public boolean withDraw(double value){
         if (value > this.getBalanceAccount()){
             System.out.println("Saldo insuficiente.");
-            System.out.println("*******************************************");
+            System.out.println("\n*******************************************");
+            return false;
         } else {
             this.balanceAccount -= value;
-            System.out.println("\nSaldo atualizado: " + getBalanceAccount());
-            System.out.println("*******************************************");
+            System.out.println("Saldo da conta " + getNumberAccount() + " atualizado.");
+            this.informationBalance();
+            System.out.println("\n*******************************************");
+            return true;
         }
     }
 
     //depositar dinheiro
-    public void deposit(double value){
+    public boolean deposit(double value){
         this.balanceAccount += value;
-        System.out.println("\nSaldo atualizado: " + getBalanceAccount());
-        System.out.println("*******************************************");
+        System.out.println("Saldo da conta " + getNumberAccount() + " atualizado.");
+        this.informationBalance();
+        System.out.println("\n*******************************************");
+        return true;
+    }
+
+    //transferenica entre contas
+    public boolean transferAccount(Conta account, double value) {
+        if (value > 0) {
+            boolean take = this.withDraw(value);
+            if (take == true) {
+                account.deposit(value);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
 }

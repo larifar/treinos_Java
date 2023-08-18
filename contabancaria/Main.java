@@ -5,6 +5,9 @@ public class Main {
         Conta minhaConta = new Conta("Jorge Ricardo", 101, 100.0);
         minhaConta.informationAccount();
         minhaConta.withDraw(50.0);
-        minhaConta.deposit(30.5);
+
+        Conta contaAna = new Conta("Ana Banana", 122, 200.0);
+        minhaConta.transferAccount(contaAna, 50.0);
+        contaAna.transferAccount(minhaConta, 100.0);
     }
 }
